@@ -1,0 +1,74 @@
+[gd_scene load_steps=11 format=3 uid="uid://db4ol55bcwjch"]
+
+[ext_resource type="Texture2D" uid="uid://cw3qd4v7lhrna" path="res://Assets/Animations/Other/Door.png" id="1_ape3d"]
+[ext_resource type="Script" path="res://Game/Scripts/EndDoor.gd" id="1_v28jf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s7bc6"]
+atlas = ExtResource("1_ape3d")
+region = Rect2(0, 0, 196, 146)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_enmi7"]
+atlas = ExtResource("1_ape3d")
+region = Rect2(196, 0, 196, 146)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wbvfp"]
+atlas = ExtResource("1_ape3d")
+region = Rect2(392, 0, 196, 146)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t2dpu"]
+atlas = ExtResource("1_ape3d")
+region = Rect2(588, 0, 196, 146)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_url4t"]
+atlas = ExtResource("1_ape3d")
+region = Rect2(784, 0, 196, 146)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0v4ol"]
+atlas = ExtResource("1_ape3d")
+region = Rect2(980, 0, 196, 146)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6obnm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s7bc6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_enmi7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wbvfp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t2dpu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_url4t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0v4ol")
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tk2xp"]
+size = Vector2(20, 80)
+
+[node name="EndDoor" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_v28jf")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = -10
+position = Vector2(0, -73)
+sprite_frames = SubResource("SpriteFrames_6obnm")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -40)
+shape = SubResource("RectangleShape2D_tk2xp")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

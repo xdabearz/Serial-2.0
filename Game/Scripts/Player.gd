@@ -17,7 +17,40 @@ var isAirborne = false
 var isShooting = false
 const SHOOT_DURATION = 0.249
 
+var currentHealth:
+	set(new_value):
+		currentHealth = new_value
+		emit_signal("playerHealthUpdated", currentHealth, MAX_HEALTH)
+const MAX_HEALTH = 100
+
+var currentCurrency = 0:
+	set(new_value):
+		currentCurrency = new_value
+		emit_signal("playerCurrencyUpdated", currentCurrency)
+
+signal playerHealthUpdated(newValue, maxValue)
+signal playerCurrencyUpdated(newValue)
+
+enum PlayerState {Normal, Hurt, Dead, Uncontrollable}
+
+var currentState : PlayerState = PlayerState.Normal:
+	set(new_value):
+		currentState = new_value
+		match currentState:
+			PlayerState.Hurt:
+				if is_on_floor():
+					animated_sprite_2d.play("Hit_Stand")
+				else:
+					animated_sprite_2d.play("Hit_Jump")
+			PlayerState.Dead:
+				animated_sprite_2d.play("Die")
+				set_collision_layer_value(2, false)
+				GameManager.PlayerIsDead()
+			PlayerState.Uncontrollable:
+				set_collision_layer_value(2, false)
+
 func _ready():
+	currentHealth = MAX_HEALTH
 	GameManager.player = self
 	GameManager.playerOriginalPos = position
 
@@ -31,6 +64,11 @@ func _physics_process(delta):
 	elif isAirborne:
 		PlayLandVFX()
 		isAirborne = false
+		
+	if currentState == PlayerState.Hurt || currentState == PlayerState.Dead || currentState == PlayerState.Uncontrollable:
+		velocity.x = 0
+		move_and_slide()
+		return
 		
 	if Input.is_action_just_pressed("Jump") && !Input.is_action_pressed("Down") && is_on_floor():
 		velocity.y = JUMP_VELOCITY
@@ -54,6 +92,14 @@ func _physics_process(delta):
 
 
 func UpdateAnimation():
+	if currentState == PlayerState.Dead:
+		return
+	elif currentState == PlayerState.Hurt:
+		if animated_sprite_2d.is_playing():
+			return
+		else:
+			currentState = PlayerState.Normal
+	
 	if velocity.x != 0:
 		animated_sprite_2d.flip_h = velocity.x < 0
 		if velocity.x < 0:
@@ -126,4 +172,27 @@ func TryToShoot():
 	isShooting = false
 
 func ApplyDamage(damage : int):
-	print("owwie")
+	if currentState == PlayerState.Hurt || currentHealth == PlayerState.Dead:
+		return
+		
+	currentHealth -= damage
+	currentState = PlayerState.Hurt
+	
+	if currentHealth <= 0:
+		currentHealth = 0
+		currentState = PlayerState.Dead
+
+
+func CollectedCurrency(value:int):
+	currentCurrency += value
+	
+	#TODO: Mainly for testing possible run upgrades, currency restores a bit of health
+	if currentHealth < MAX_HEALTH:
+		currentHealth += value * 3
+		if currentHealth > MAX_HEALTH:
+			currentHealth = MAX_HEALTH
+			
+			
+#Another drunken stupid name
+func SwitchStateToUncontrollable():
+	currentState = PlayerState.Uncontrollable

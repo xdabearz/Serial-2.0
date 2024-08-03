@@ -1,10 +1,13 @@
-[gd_scene load_steps=89 format=3 uid="uid://ckapbi1augqi8"]
+[gd_scene load_steps=123 format=3 uid="uid://ckapbi1augqi8"]
 
 [ext_resource type="Texture2D" uid="uid://cnc3q5n5xynyj" path="res://Assets/Tilemap/Tilemap_ProjectLittleAdventurerAndie2D.png" id="1_mmac3"]
 [ext_resource type="Script" path="res://Game/Scripts/Player.gd" id="2_ye3gq"]
 [ext_resource type="Texture2D" uid="uid://bxgiepgo5fdem" path="res://Assets/Animations/Player/Idle.png" id="2_ytfgp"]
+[ext_resource type="Texture2D" uid="uid://h1gef5q54hwq" path="res://Assets/Animations/Player/Die.png" id="3_vkhuq"]
 [ext_resource type="Texture2D" uid="uid://fhtoeqr4bmd0" path="res://Assets/Animations/Player/Jump.png" id="4_362li"]
+[ext_resource type="Texture2D" uid="uid://245akv2j8jfo" path="res://Assets/Animations/Player/Hit_Jump.png" id="4_pkpfg"]
 [ext_resource type="Texture2D" uid="uid://ce4wwv5rf3phh" path="res://Assets/Animations/Player/Run.png" id="5_g7b8k"]
+[ext_resource type="Texture2D" uid="uid://be01gjp1evvrv" path="res://Assets/Animations/Player/Hit_Stand.png" id="5_mxync"]
 [ext_resource type="Texture2D" uid="uid://cf28py4v1hki" path="res://Assets/Animations/Player/Shoot_Stand.png" id="6_047g0"]
 [ext_resource type="Texture2D" uid="uid://cgis4hknotoac" path="res://Assets/Animations/Player/Shoot_Jump.png" id="6_ld6pj"]
 [ext_resource type="Script" path="res://Game/Scripts/PlayerResetArea.gd" id="6_s2rj3"]
@@ -23,6 +26,9 @@
 [ext_resource type="Texture2D" uid="uid://cb1otjm42s7cl" path="res://Assets/Background/CloseBackground/CBG04_ProjectLittleAdventurerAndie2D.png" id="16_k4t70"]
 [ext_resource type="Texture2D" uid="uid://dfng825ssudik" path="res://Assets/Background/CloseBackground/CBG05_ProjectLittleAdventurerAndie2D.png" id="17_x3uew"]
 [ext_resource type="PackedScene" uid="uid://bsngee8ep7sig" path="res://Game/Scenes/enemy.tscn" id="20_lgurx"]
+[ext_resource type="Script" path="res://Game/Scripts/UI_Manager.gd" id="26_hrq4v"]
+[ext_resource type="PackedScene" uid="uid://dosck6iw03o6x" path="res://Game/Scenes/currency.tscn" id="28_abcfe"]
+[ext_resource type="PackedScene" uid="uid://db4ol55bcwjch" path="res://Game/Scenes/end_door.tscn" id="29_tgb2n"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_v0c8u"]
 friction = 0.0
@@ -629,6 +635,90 @@ sources/0 = SubResource("TileSetAtlasSource_g38a7")
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lfkrm"]
 radius = 6.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_rkca1"]
+atlas = ExtResource("3_vkhuq")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ksbc"]
+atlas = ExtResource("3_vkhuq")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5nwqb"]
+atlas = ExtResource("3_vkhuq")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ycpvt"]
+atlas = ExtResource("3_vkhuq")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_seood"]
+atlas = ExtResource("3_vkhuq")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5shd7"]
+atlas = ExtResource("3_vkhuq")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k3tc1"]
+atlas = ExtResource("3_vkhuq")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vnlyc"]
+atlas = ExtResource("3_vkhuq")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vq4se"]
+atlas = ExtResource("3_vkhuq")
+region = Rect2(512, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1lbsn"]
+atlas = ExtResource("4_pkpfg")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hwd06"]
+atlas = ExtResource("4_pkpfg")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2p8wy"]
+atlas = ExtResource("4_pkpfg")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cerf0"]
+atlas = ExtResource("4_pkpfg")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_466n6"]
+atlas = ExtResource("4_pkpfg")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iivjo"]
+atlas = ExtResource("4_pkpfg")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m7ul7"]
+atlas = ExtResource("5_mxync")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oi0mr"]
+atlas = ExtResource("5_mxync")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fy078"]
+atlas = ExtResource("5_mxync")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s4njp"]
+atlas = ExtResource("5_mxync")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6co72"]
+atlas = ExtResource("5_mxync")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k2kw3"]
+atlas = ExtResource("5_mxync")
+region = Rect2(320, 0, 64, 64)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_2yqh3"]
 atlas = ExtResource("2_ytfgp")
 region = Rect2(0, 0, 64, 64)
@@ -803,6 +893,84 @@ region = Rect2(256, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_sbbtg"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rkca1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ksbc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5nwqb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ycpvt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_seood")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5shd7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k3tc1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vnlyc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vq4se")
+}],
+"loop": false,
+"name": &"Die",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1lbsn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hwd06")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2p8wy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cerf0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_466n6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iivjo")
+}],
+"loop": false,
+"name": &"Hit_Jump",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m7ul7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oi0mr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fy078")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s4njp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6co72")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k2kw3")
+}],
+"loop": false,
+"name": &"Hit_Stand",
+"speed": 10.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_2yqh3")
@@ -1081,6 +1249,54 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dnrv4"]
+bg_color = Color(0, 0, 0, 0.588235)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.784314, 0.317647, 0.407843, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lmrwk"]
+bg_color = Color(0.784314, 0.317647, 0.407843, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_np8h7"]
+font_size = 80
+font_color = Color(1, 0.792157, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_3ksmh"]
+font_size = 80
+font_color = Color(0.823529, 0.67451, 0.0862745, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_41i4l"]
+bg_color = Color(0.823529, 0.67451, 0.0862745, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uk0l3"]
+bg_color = Color(0.25098, 0.741176, 0.764706, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vevml"]
+bg_color = Color(0.180392, 0.662745, 0.584314, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
 [node name="Root" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -1102,7 +1318,7 @@ shape = SubResource("CapsuleShape2D_lfkrm")
 z_index = 100
 position = Vector2(0, -32)
 sprite_frames = SubResource("SpriteFrames_sbbtg")
-animation = &"Shoot_Run"
+animation = &"Hit_Stand"
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 offset = Vector2(0, -80)
@@ -1226,10 +1442,107 @@ motion_mirroring = Vector2(920, 0)
 texture = ExtResource("14_y5y13")
 centered = false
 
-[node name="Enemy" parent="." instance=ExtResource("20_lgurx")]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 110
+script = ExtResource("26_hrq4v")
+
+[node name="HUD" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HealthBar" type="ProgressBar" parent="CanvasLayer/HUD"]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 50.0
+offset_right = 450.0
+offset_bottom = 90.0
+theme_override_styles/background = SubResource("StyleBoxFlat_dnrv4")
+theme_override_styles/fill = SubResource("StyleBoxFlat_lmrwk")
+value = 100.0
+show_percentage = false
+
+[node name="CurrencyLabel" type="Label" parent="CanvasLayer/HUD"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -86.0
+offset_top = 20.0
+offset_right = -40.0
+offset_bottom = 130.0
+grow_horizontal = 0
+text = "0"
+label_settings = SubResource("LabelSettings_np8h7")
+
+[node name="GameOverScreen" type="Panel" parent="CanvasLayer"]
+self_modulate = Color(0, 0, 0, 0.784314)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameOverLabel" type="Label" parent="CanvasLayer/GameOverScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -412.0
+offset_top = -55.0
+offset_right = 412.0
+offset_bottom = 55.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "U di3d. TRASH GAMER"
+label_settings = SubResource("LabelSettings_3ksmh")
+
+[node name="RestartButton" type="Button" parent="CanvasLayer/GameOverScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = 76.0
+offset_right = 229.0
+offset_bottom = 156.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_41i4l")
+theme_override_styles/hover = SubResource("StyleBoxFlat_uk0l3")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_vevml")
+text = "RESTORE HONOR?"
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Enemy" parent="Enemies" instance=ExtResource("20_lgurx")]
 position = Vector2(512, 24)
 
-[node name="Enemy2" parent="." instance=ExtResource("20_lgurx")]
+[node name="Enemy2" parent="Enemies" instance=ExtResource("20_lgurx")]
 position = Vector2(744, -24)
 
+[node name="EndDoor" parent="." instance=ExtResource("29_tgb2n")]
+position = Vector2(2392, -88)
+
+[node name="CurrencyDrops" type="Node2D" parent="."]
+
+[node name="Currency" parent="CurrencyDrops" instance=ExtResource("28_abcfe")]
+position = Vector2(176, -16)
+
+[node name="Currency2" parent="CurrencyDrops" instance=ExtResource("28_abcfe")]
+position = Vector2(176, -16)
+
 [connection signal="body_entered" from="Area2D_PlayerResetArea" to="Area2D_PlayerResetArea" method="_on_body_entered"]
+[connection signal="pressed" from="CanvasLayer/GameOverScreen/RestartButton" to="CanvasLayer" method="_on_restart_button_pressed"]
